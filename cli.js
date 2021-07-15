@@ -3,18 +3,8 @@ import tmp from 'tmp-promise';
 import git from 'git-clone-promise';
 import { exec } from 'child_process';
 import rimraf from 'rimraf';
-
-function execute(command, cwdPath, callback) {
-    exec(command, {cwd: cwdPath}, function (error, stdout, stderr) { callback(error, stdout, stderr); });
-};
-
-const tmpDirectory = await tmp.dir({ 'tmpdir': `${process.cwd()}` });
-
-const getUnusedPackages = function (callback, repoPath) {
-    execute("dependency-check ./package.json ./*.js --unused", repoPath, function (error, stdout, stderr) {
-        callback(error, stdout, stderr);
-    });
-};
+import fs from 'fs';
+import path from 'path';
 
 const args = process.argv.slice(2);
 if (args.length < 1) {
@@ -23,6 +13,10 @@ if (args.length < 1) {
 }
 
 const maxReposToFetch = args[0];
+
+const dir = './tmp_repos';
+createTempReposDir(dir);
+const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
 
 console.log('Trending Repos CLI v1.0')
 console.log('-----------------------')
@@ -43,19 +37,34 @@ for (const repo of topRepos) {
     }
 }
 
+const getUnusedPackages = function (callback, repoPath) {
+    execute("dependency-check ./package.json ./*.js --unused", repoPath, function (error, stdout, stderr) {
+        callback(error, stdout, stderr);
+    });
+};
+
 console.log('')
 console.log(`Top ${maxReposToFetch} Trending Repositories:`);
 for (const repo of topRepos) {
-    getUnusedPackages((error, stdout, stderror) => {  
-        if(stderror && stderror.includes('Fail!')){
-            repo.securityScore = stderror.split('code:')[1].split(',').length; 
+    getUnusedPackages((error, stdout, stderror) => {
+        if (stderror && stderror.includes('Fail!')) {
+            repo.securityScore = stderror.split('code:')[1].split(',').length;
             console.log(repo);
         }
-        else{
+        else {
             repo.securityScore = 0;
             console.log(repo);
         }
+        rimraf(repo.absolutePath, function () { /*console.log('remove folder', repo.absolutePath)*/ });
     }, repo.absolutePath);
 }
 
-//rimraf(tmpDirectory.path, function () { });
+function createTempReposDir(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(didirPathr);
+    }
+}
+
+function execute(command, cwdPath, callback) {
+    exec(command, { cwd: cwdPath }, function (error, stdout, stderr) { callback(error, stdout, stderr); });
+};
