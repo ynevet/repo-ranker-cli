@@ -4,10 +4,15 @@ A CLI tool to fetch trednding GitHub repositories with a secirity score.
 As for v1.00, the CLI fetches weekly trending JavaScript repositories and next version would allow more flexability to fetch more type of repositories.
 
 **Installation & Usage**
-
+ - prerequisite: Node Version => v14
  - clone this repo
  - cd to the repo folder
- - run: node cli.js <max-repo-to-fetch>
+ - run:
+ 
+       npm install
+       
+       node cli.js <max-repo-to-fetch>
+      
  - check the output
 
 **CLI Output Description**
