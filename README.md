@@ -1,15 +1,20 @@
-# repo-ranker
-**Description**
-
+# Repo Ranker CLI
+**Description:**
 A CLI tool to fetch trednding GitHub repositories with a secirity score.
 As for v1.00, the CLI fetches weekly trending JavaScript repositories and next version would allow more flexability to fetch more type of repositories.
 
-**Installation & Usage:**
+**Installation & Usage**
 
  - clone this repo
  - cd to the repo folder
  - run: node cli.js <max-repo-to-fetch>
- - check the results
+ - check the output
+
+**CLI Output Description**
+
+The CLI output contains the fetched trending repositories formatted in JSON format and contains various general fields and a security score field:
+- **securityScore** : indicates about the current repo security state in terms of total unused packages
+
   
  **Usage Exmaple:**
 
