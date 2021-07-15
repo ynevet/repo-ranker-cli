@@ -1,0 +1,31 @@
+{
+  "name": "repo-ranker",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynevet/repo-ranker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ynevet/repo-ranker/issues"
+  },
+  "homepage": "https://github.com/ynevet/repo-ranker#readme",
+  "dependencies": {
+    "dependency-check": "^4.1.0",
+    "git-clone": "^0.1.0",
+    "git-clone-promise": "^1.0.0",
+    "promise": "^8.1.0",
+    "rimraf": "^3.0.2",
+    "tmp": "^0.2.1",
+    "tmp-promise": "^3.0.2",
+    "trending-github": "^2.0.7"
+  }
+}
