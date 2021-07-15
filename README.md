@@ -30,15 +30,15 @@ The CLI output contains the fetched trending repositories formatted in JSON form
     
     Top 5 Trending Repositories:
     {
-      author: 'philc',
-      name: 'vimium',
-      href: 'https://github.com/philc/vimium',
-      description: "The hacker's browser.",
+      author: '30-seconds',
+      name: '30-seconds-of-code',
+      href: 'https://github.com/30-seconds/30-seconds-of-code',
+      description: 'Short JavaScript code snippets for all your development needs',
       language: 'JavaScript',
-      stars: 16103,
-      forks: 1933,
-      starsInPeriod: 320,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp-15860-a5JjGxR424pf/vimium',
+      stars: 80936,
+      forks: 8652,
+      starsInPeriod: 1772,
+      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/30-seconds-of-code',
       securityScore: 0
     }
     {
@@ -47,34 +47,10 @@ The CLI output contains the fetched trending repositories formatted in JSON form
       href: 'https://github.com/airbnb/javascript',
       description: 'JavaScript Style Guide',
       language: 'JavaScript',
-      stars: 111948,
-      forks: 21444,
-      starsInPeriod: 1173,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp-15860-a5JjGxR424pf/javascript',
-      securityScore: 0
-    }
-    {
-      author: 'trekhleb',
-      name: 'javascript-algorithms',
-      href: 'https://github.com/trekhleb/javascript-algorithms',
-      description: '📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings',
-      language: 'JavaScript',
-      stars: 114395,
-      forks: 18812,
-      starsInPeriod: 1975,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp-15860-a5JjGxR424pf/javascript-algorithms',
-      securityScore: 0
-    }
-    {
-      author: '30-seconds',
-      name: '30-seconds-of-code',
-      href: 'https://github.com/30-seconds/30-seconds-of-code',
-      description: 'Short JavaScript code snippets for all your development needs',
-      language: 'JavaScript',
-      stars: 80917,
-      forks: 8647,
-      starsInPeriod: 1767,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp-15860-a5JjGxR424pf/30-seconds-of-code',
+      stars: 111953,
+      forks: 21446,
+      starsInPeriod: 1172,
+      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/javascript',
       securityScore: 0
     }
     {
@@ -83,9 +59,33 @@ The CLI output contains the fetched trending repositories formatted in JSON form
       href: 'https://github.com/jaywcjlove/awesome-mac',
       description: ' Now we have become very big, Different from the original idea. Collect premium software in various categories.',
       language: 'JavaScript',
-      stars: 43807,
+      stars: 43916,
       forks: 4834,
-      starsInPeriod: 1282,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp-15860-a5JjGxR424pf/awesome-mac',
+      starsInPeriod: 1389,
+      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/awesome-mac',
       securityScore: 0
+    }
+    {
+      author: 'trekhleb',
+      name: 'javascript-algorithms',
+      href: 'https://github.com/trekhleb/javascript-algorithms',
+      description: '📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings',
+      language: 'JavaScript',
+      stars: 114415,
+      forks: 18820,
+      starsInPeriod: 1980,
+      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/javascript-algorithms',
+      securityScore: 12
+    }
+    {
+      author: 'philc',
+      name: 'vimium',
+      href: 'https://github.com/philc/vimium',
+      description: "The hacker's browser.",
+      language: 'JavaScript',
+      stars: 16106,
+      forks: 1933,
+      starsInPeriod: 320,
+      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/vimium',
+      securityScore: 1
     }
