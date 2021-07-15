@@ -3,16 +3,10 @@ import tmp from 'tmp-promise';
 import git from 'git-clone-promise';
 import { exec } from 'child_process';
 import rimraf from 'rimraf';
-import fs from 'fs';
 
 function execute(command, cwdPath, callback) {
     exec(command, {cwd: cwdPath}, function (error, stdout, stderr) { callback(error, stdout, stderr); });
 };
-
-const tmpReposDir = 'tmp_repos';
-if (!fs.existsSync(tmpReposDir)){
-    fs.mkdirSync(tmpReposDir);
-}
 
 const tmpDirectory = await tmp.dir({ 'tmpdir': `${process.cwd()}` });
 
@@ -52,16 +46,16 @@ for (const repo of topRepos) {
 console.log('')
 console.log(`Top ${maxReposToFetch} Trending Repositories:`);
 for (const repo of topRepos) {
-    getUnusedPackages((error, stdout, stderror) => {
-        if(error || stdout){
-            repo.securityScore = 0;
-            console.info(repo)
-        }   
+    getUnusedPackages((error, stdout, stderror) => {  
         if(stderror && stderror.includes('Fail!')){
             repo.securityScore = stderror.split('code:')[1].split(',').length; 
-            console.info(repo)
+            console.log(repo);
+        }
+        else{
+            repo.securityScore = 0;
+            console.log(repo);
         }
     }, repo.absolutePath);
 }
 
-rimraf(tmpDirectory.path, function () { });
+//rimraf(tmpDirectory.path, function () { });
