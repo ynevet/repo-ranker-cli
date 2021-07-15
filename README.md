@@ -1,5 +1,6 @@
 # Repo Ranker CLI
-**Description:**
+**Description**
+
 A CLI tool to fetch trednding GitHub repositories with a secirity score.
 As for v1.00, the CLI fetches weekly trending JavaScript repositories and next version would allow more flexability to fetch more type of repositories.
 
