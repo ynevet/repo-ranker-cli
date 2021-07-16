@@ -11,9 +11,7 @@ console.log('-----------------------')
 
 const maxReposToFetch = readAndValidateArgs();
 
-const dir = './tmp_repos';
-createTempReposDir(dir);
-const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
+const tmpDirectory = await createTempReposDir();
 
 console.log('Fetching trending repos..')
 let trendingRepos = [];
@@ -44,14 +42,7 @@ for (const repo of topRepos) {
     }
 }
 
-const getUnusedPackages = function (callback, repoPath) {
-    execute("dependency-check ./package.json ./*.js --unused", repoPath, function (error, stdout, stderr) {
-        callback(error, stdout, stderr);
-    });
-};
-
-console.log('')
-console.log(`Top ${maxReposToFetch} Trending Repositories:`);
+console.log(`\nTop ${maxReposToFetch} Trending Repositories:`);
 for (const repo of topRepos) {
     getUnusedPackages((error, stdout, stderror) => {
         if (stderror && stderror.includes('Fail!')) {
@@ -65,6 +56,19 @@ for (const repo of topRepos) {
         rimraf(repo.absolutePath, function () { /*console.log('remove folder', repo.absolutePath)*/ });
     }, repo.absolutePath);
 }
+
+async function createTempReposDir() {
+    const dir = './tmp_repos';
+    createLocalReposDir(dir);
+    const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
+    return tmpDirectory;
+}
+
+function getUnusedPackages(callback, repoPath) {
+    execute("dependency-check ./package.json ./*.js --unused", repoPath, function (error, stdout, stderr) {
+        callback(error, stdout, stderr);
+    });
+};
 
 function readAndValidateArgs() {
     const args = process.argv.slice(2);
@@ -82,7 +86,7 @@ function readAndValidateArgs() {
     return maxReposToFetch;
 }
 
-function createTempReposDir(dirPath) {
+function createLocalReposDir(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(didirPathr);
     }
