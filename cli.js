@@ -6,23 +6,30 @@ import rimraf from 'rimraf';
 import fs from 'fs';
 import path from 'path';
 
-const args = process.argv.slice(2);
-if (args.length < 1) {
-    console.error('Please supply the max repositories to fetch argument (e.g. node cli.js 5)')
-    process.exit(1)
-}
+console.log('Trending Repos CLI v1.0')
+console.log('-----------------------')
 
-const maxReposToFetch = args[0];
+const maxReposToFetch = readAndValidateArgs();
 
 const dir = './tmp_repos';
 createTempReposDir(dir);
 const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
 
-console.log('Trending Repos CLI v1.0')
-console.log('-----------------------')
 console.log('Fetching trending repos..')
+let trendingRepos = [];
+try {
+    trendingRepos = await trending('weekly', 'javascript');
+}
+catch (err) {
+    console.error('Failed to fetch trending repos.', err);
+    process.exit(1)
+}
 
-const trendingRepos = await trending('weekly', 'javascript');
+if (trendingRepos.length == 0) {
+    console.info('No trending repos found');
+    process.exit(0);
+}
+
 const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
 
 for (const repo of topRepos) {
@@ -57,6 +64,22 @@ for (const repo of topRepos) {
         }
         rimraf(repo.absolutePath, function () { /*console.log('remove folder', repo.absolutePath)*/ });
     }, repo.absolutePath);
+}
+
+function readAndValidateArgs() {
+    const args = process.argv.slice(2);
+    if (args.length < 1) {
+        console.error('Please supply the max repositories to fetch argument (e.g. node cli.js 5)');
+        process.exit(1);
+    }
+
+    const maxReposToFetch = args[0];
+
+    if (maxReposToFetch < 1 || isNaN(maxReposToFetch)) {
+        console.error('max arg value should be a number greater than 0');
+        process.exit(1);
+    }
+    return maxReposToFetch;
 }
 
 function createTempReposDir(dirPath) {
