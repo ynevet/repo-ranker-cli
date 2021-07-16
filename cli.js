@@ -21,9 +21,9 @@ const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
 console.log('Trending Repos CLI v1.0')
 console.log('-----------------------')
 console.log('Fetching trending repos..')
-const trendingRepos = await trending('weekly', 'javascript');
 
-const topRepos = trendingRepos.slice(0, maxReposToFetch);
+const trendingRepos = await trending('weekly', 'javascript');
+const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
 
 for (const repo of topRepos) {
     const repoPath = `${tmpDirectory.path}/${repo.name}`;
