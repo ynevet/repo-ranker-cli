@@ -1,76 +1,39 @@
 import trending from 'trending-github';
-import tmp from 'tmp-promise';
-import git from 'git-clone-promise';
-import { exec } from 'child_process';
-import rimraf from 'rimraf';
-import fs from 'fs';
-import path from 'path';
+import getScoredRepos from './modules/repo-security-scoring.js';
 
-console.log('Trending Repos CLI v1.0')
-console.log('-----------------------')
+printWelcomeMessage();
+await processReposAndPrintResults(validateAndGetArg());
 
-const maxReposToFetch = readAndValidateArgs();
+async function processReposAndPrintResults(maxReposToFetch) {
+    console.log('Fetching trending repos..');
 
-const tmpDirectory = await createTempReposDir();
-
-console.log('Fetching trending repos..')
-let trendingRepos = [];
-try {
-    trendingRepos = await trending('weekly', 'javascript');
-}
-catch (err) {
-    console.error('Failed to fetch trending repos.', err);
-    process.exit(1)
-}
-
-if (trendingRepos.length == 0) {
-    console.info('No trending repos found');
-    process.exit(0);
-}
-
-const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
-
-for (const repo of topRepos) {
-    const repoPath = `${tmpDirectory.path}/${repo.name}`;
+    let trendingRepos = [];
     try {
-        await git(repo.href, repoPath);
-        repo.absolutePath = repoPath;
+        trendingRepos = await trending('weekly', 'javascript');
     }
     catch (err) {
-        console.error(`Failed to clone a repo[${repo.name}]. Message: `, err.message)
-        process.exit(1)
+        console.error('Failed to fetch trending repos.', err);
+        process.exit(1);
     }
+
+    if (trendingRepos.length == 0) {
+        console.info('No trending repos found');
+        process.exit(0);
+    }
+
+    const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
+
+    const results = await getScoredRepos(topRepos);
+    console.log(`\nTop ${maxReposToFetch} Trending Repositories:`);
+    console.log(results);
 }
 
-console.log(`\nTop ${maxReposToFetch} Trending Repositories:`);
-for (const repo of topRepos) {
-    getUnusedPackages((error, stdout, stderror) => {
-        if (stderror && stderror.includes('Fail!')) {
-            repo.securityScore = stderror.split('code:')[1].split(',').length;
-            console.log(repo);
-        }
-        else {
-            repo.securityScore = 0;
-            console.log(repo);
-        }
-        rimraf(repo.absolutePath, function () { /*console.log('remove folder', repo.absolutePath)*/ });
-    }, repo.absolutePath);
+function printWelcomeMessage() {
+    console.log('Trending Repos CLI v1.0');
+    console.log('***********************');
 }
 
-async function createTempReposDir() {
-    const dir = './tmp_repos';
-    createLocalReposDir(dir);
-    const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
-    return tmpDirectory;
-}
-
-function getUnusedPackages(callback, repoPath) {
-    execute("dependency-check ./package.json ./*.js --unused", repoPath, function (error, stdout, stderr) {
-        callback(error, stdout, stderr);
-    });
-};
-
-function readAndValidateArgs() {
+function validateAndGetArg() {
     const args = process.argv.slice(2);
     if (args.length < 1) {
         console.error('Please supply the max repositories to fetch argument (e.g. node cli.js 5)');
@@ -85,13 +48,3 @@ function readAndValidateArgs() {
     }
     return maxReposToFetch;
 }
-
-function createLocalReposDir(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(didirPathr);
-    }
-}
-
-function execute(command, cwdPath, callback) {
-    exec(command, { cwd: cwdPath }, function (error, stdout, stderr) { callback(error, stdout, stderr); });
-};
