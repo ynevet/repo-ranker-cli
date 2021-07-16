@@ -17,7 +17,7 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
 
 **CLI Output Description**
 
-The CLI output contains the fetched trending repositories formatted in JSON format and contains various general fields and a security score field:
+The CLI output contains the fetched trending repositories formatted in JSON and contains various general fields and a security score field:
 - **securityScore** : indicates about the current repo security state in terms of total unused packages
 
   
