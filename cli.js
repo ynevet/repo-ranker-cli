@@ -2,7 +2,8 @@ import trending from 'trending-github';
 import getScoredRepos from './modules/repo-security-scoring.js';
 
 printWelcomeMessage();
-await processReposAndPrintResults(validateAndGetArg());
+const maxReposToFetch = validateAndGetArg();
+await processReposAndPrintResults(maxReposToFetch);
 
 async function processReposAndPrintResults(maxReposToFetch) {
     console.log('Fetching trending repos..');

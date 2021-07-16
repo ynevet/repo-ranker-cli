@@ -1,9 +1,9 @@
 {
-  "name": "repo-ranker",
+  "name": "repo-ranker-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "A CLI tool to fetch trending GitHub repositories with a security score notation. As for v1.00, the CLI fetches weekly trending JavaScript repositories and the next version is planned to allow more flexibility to fetch more types of repositories.",
   "type": "module",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/ynevet/repo-ranker.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yair Nevet",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ynevet/repo-ranker/issues"
