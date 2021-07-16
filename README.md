@@ -4,7 +4,9 @@
 A CLI tool to fetch trending GitHub repositories with a security score notation. As for v1.00, the CLI fetches weekly trending JavaScript repositories and the next version is planned to allow more flexibility to fetch more types of repositories.
 
 **Installation & Usage**
- - prerequisite: NodeJS version => v14.00
+ - prerequisite:
+   - NodeJS version => v14.00
+   - dependency-check package (run: npm install dependency-check -g)
  - clone this repo
  - cd to the repo folder
  - run:
