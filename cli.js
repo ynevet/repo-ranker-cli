@@ -1,5 +1,5 @@
 import trending from 'trending-github';
-import getScoredRepos from './modules/repo-security-scoring.js';
+import getScoredRepos from './modules/repo-security-scoring/index.js';
 
 printWelcomeMessage();
 const maxReposToFetch = validateAndGetArg();

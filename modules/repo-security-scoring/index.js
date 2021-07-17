@@ -1,5 +1,5 @@
 import tmp from 'tmp-promise';
-import git from 'git-clone-promise';
+import gitClone from 'git-clone-promise';
 import { exec } from 'child_process';
 import del from 'del';
 import fs from 'fs';
@@ -15,13 +15,9 @@ export default async function getScoredRepos(reposToScore) {
         const scoredRepos = [];
         for (const repo of reposToScore) {
             const repoPath = `${tmpDirectory.path}/${repo.name}`;
-            await git(repo.href, repoPath);
-            repo.absolutePath = repoPath;
-        }
-        
-        for (const repo of reposToScore) {
-            const unusedPackages = await getUnusedPackages(repo.absolutePath);
-            repo.securityScore = unusedPackages;
+            await gitClone(repo.href, repoPath);
+            repo.unusedPackages = await getRepoUnusedPackages(repoPath);
+            repo.securityScore = repo.unusedPackages.length;
             scoredRepos.push(repo);
         }
         await del(tempReposDir);
@@ -37,18 +33,18 @@ async function createTempReposDir(dir) {
     return tmpDirectory;
 }
 
-async function getUnusedPackages(repoPath) {
+export async function getRepoUnusedPackages(repoPath) {
     try {
         const { _, stderr } = await exec_promise('dependency-check ./package.json ./*.js --unused --ignore', { cwd: repoPath });
         if (stderr && stderr.includes('Fail!')) {
-            return stderr.split('code:')[1].split(',').length;
+            return stderr.split('code:')[1].split(',');
         }
     }
     catch (err) {
-        return 0;
+        return [];
     }
 
-    return 0;
+    return [];
 }
 
 function createLocalReposDir(dirPath) {
