@@ -6,7 +6,7 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
 **Installation & Usage**
  - prerequisite:
    - NodeJS version => v14.00
-   - dependency-check package (run: npm install dependency-check -g)
+   - dependency-check package (run: `npm install dependency-check -g`)
  - clone this repo
  - cd to the repo folder
  - run:
@@ -41,7 +41,6 @@ The CLI output contains the fetched trending repositories formatted in JSON and 
       stars: 80936,
       forks: 8652,
       starsInPeriod: 1772,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/30-seconds-of-code',
       securityScore: 0
     }
     {
@@ -53,7 +52,6 @@ The CLI output contains the fetched trending repositories formatted in JSON and 
       stars: 111953,
       forks: 21446,
       starsInPeriod: 1172,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/javascript',
       securityScore: 0
     }
     {
@@ -65,7 +63,6 @@ The CLI output contains the fetched trending repositories formatted in JSON and 
       stars: 43916,
       forks: 4834,
       starsInPeriod: 1389,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/awesome-mac',
       securityScore: 0
     }
     {
@@ -77,7 +74,6 @@ The CLI output contains the fetched trending repositories formatted in JSON and 
       stars: 114415,
       forks: 18820,
       starsInPeriod: 1980,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/javascript-algorithms',
       securityScore: 12
     }
     {
@@ -89,6 +85,5 @@ The CLI output contains the fetched trending repositories formatted in JSON and 
       stars: 16106,
       forks: 1933,
       starsInPeriod: 320,
-      absolutePath: '/Users/ynevet/my-projects/repo-ranker/tmp_repos/tmp-77056-jmZcormTG3WJ/vimium',
       securityScore: 1
     }
