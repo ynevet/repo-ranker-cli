@@ -53,10 +53,8 @@ function createLocalReposDir(dirPath) {
     }
 }
 
-//deletion
 //parallel
 //map
 //args utils
-//docker image
 //rest api
 //CSAT
