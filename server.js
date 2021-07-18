@@ -4,7 +4,9 @@ import getTrending from './modules/trending-repos/index.js';
 const PORT = process.env.PORT || 8080;
 const app = express()
 
-app.get('/api/trending-repos', async function (req, res) {
+app.get('/api/trending-repos', getRoute)
+
+async function getRoute (req, res) {
     try {
         let max = req.query.max || 10;
         const repos = await getTrending(max, 'weekly', 'javascript');
@@ -14,7 +16,7 @@ app.get('/api/trending-repos', async function (req, res) {
         console.error(error);
         res.status(500).send(`API ERROR: An error occurred while retrieving and processing repos`)
     }
-})
+}
 
 app.listen(PORT);
 console.log(`App listening on http://localhost:${PORT}/`)
