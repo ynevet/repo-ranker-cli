@@ -21,11 +21,8 @@
   "dependencies": {
     "del": "^6.0.0",
     "dependency-check": "^4.1.0",
-    "git-clone": "^0.1.0",
     "git-clone-promise": "^1.0.0",
     "promise": "^8.1.0",
-    "rimraf": "^3.0.2",
-    "tmp": "^0.2.1",
     "tmp-promise": "^3.0.2",
     "trending-github": "^2.0.7",
     "util": "^0.12.4"
