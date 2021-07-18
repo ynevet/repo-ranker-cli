@@ -7,15 +7,15 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
  - Prerequisite:
    - NodeJS version => v14.00
    - dependency-check package (run: `npm install dependency-check -g`)
- - `git clone https://github.com/ynevet/repo-ranker-cli.git`
- - `cd repo-ranker-cli`
- - `npm install`
- - `node cli.js <max-repos-to-fetch>`
- - check the output
+ - `$ git clone https://github.com/ynevet/repo-ranker-cli.git`
+ - `$ cd repo-ranker-cli`
+ - `$ npm install`
+ - `$ node cli.js <max-repos-to-fetch>`
+ - check the CLI output
 
 **CLI Output Description**
 
-The CLI output contains the fetched trending repositories formatted in Json, contains various general repo details fields *including various security fields*:
+The CLI output contains the fetched trending repositories formatted in JSON, contains various general repo details fields **including various security fields**:
 - **securityScore**: Based on the total unused packages of the current repo
 - **unusedPackages**: List all of the unused packages for the current repo
 
