@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import trending from 'trending-github';
 import scoreRepos from './modules/repo-security-scorer/index.js';
 import getTrending from './modules/trending-repos/index.js';
 
@@ -10,8 +9,6 @@ await processReposAndPrintResults(maxReposToFetch);
 
 async function processReposAndPrintResults(maxReposToFetch) {
     console.log('Fetching trending repos..');
-
-
 
     let trendingRepos = [];
     try {
