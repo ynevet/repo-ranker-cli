@@ -21,6 +21,7 @@
   "dependencies": {
     "del": "^6.0.0",
     "dependency-check": "^4.1.0",
+    "express": "^4.17.1",
     "git-clone-promise": "^1.0.0",
     "promise": "^8.1.0",
     "tmp-promise": "^3.0.2",

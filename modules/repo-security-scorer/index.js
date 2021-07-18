@@ -7,7 +7,7 @@ import path from 'path';
 import util from 'util';
 const exec_promise = util.promisify(exec);
 
-export default async function getScoredRepos(reposToScore) {
+export default async function scoreRepos(reposToScore) {
     if (reposToScore && reposToScore.length > 0) {
         const tempReposDir = './tmp_repos';
         const tmpDirectory = await createTempReposDir(tempReposDir);
@@ -27,24 +27,24 @@ export default async function getScoredRepos(reposToScore) {
     throw Error('reposToScore parameter should not be null or empty');
 };
 
-async function createTempReposDir(dir) {
-    createLocalReposDir(dir);
-    const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
-    return tmpDirectory;
-}
-
 export async function getRepoUnusedPackages(repoPath) {
     try {
         const { _, stderr } = await exec_promise('dependency-check ./package.json ./*.js --unused --ignore', { cwd: repoPath });
         if (stderr && stderr.includes('Fail!')) {
-            return stderr.split('code:')[1].split(',');
+            return stderr.split('code:')[1].split(',').map(i => i.trim());
         }
+
+        return [];
     }
     catch (err) {
         return [];
     }
+}
 
-    return [];
+async function createTempReposDir(dir) {
+    createLocalReposDir(dir);
+    const tmpDirectory = await tmp.dir({ 'tmpdir': path.join(process.cwd(), dir) });
+    return tmpDirectory;
 }
 
 function createLocalReposDir(dirPath) {
@@ -55,6 +55,4 @@ function createLocalReposDir(dirPath) {
 
 //parallel
 //map
-//args utils
-//rest api
 //CSAT

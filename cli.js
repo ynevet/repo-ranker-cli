@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import trending from 'trending-github';
-import getScoredRepos from './modules/repo-security-scoring/index.js';
+import scoreRepos from './modules/repo-security-scorer/index.js';
+import getTrending from './modules/trending-repos/index.js';
 
 printWelcomeMessage();
 const maxReposToFetch = validateAndGetArg();
@@ -10,9 +11,11 @@ await processReposAndPrintResults(maxReposToFetch);
 async function processReposAndPrintResults(maxReposToFetch) {
     console.log('Fetching trending repos..');
 
+
+
     let trendingRepos = [];
     try {
-        trendingRepos = await trending('weekly', 'javascript');
+        trendingRepos = await getTrending(maxReposToFetch, 'weekly', 'javascript');
     }
     catch (err) {
         console.error('Failed to fetch trending repos.', err);
@@ -23,11 +26,8 @@ async function processReposAndPrintResults(maxReposToFetch) {
         console.info('No trending repos found');
         process.exit(0);
     }
-
-    const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
-
-    const results = await getScoredRepos(topRepos);
-    console.log(`\nTop ${topRepos.length} Trending Repositories:`);
+    const results = await scoreRepos(trendingRepos);
+    console.log(`\nTop ${results.length} Trending Repositories:`);
     console.log(results);
 }
 
