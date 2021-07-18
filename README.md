@@ -13,6 +13,13 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
  - `$ node cli.js <max-repos-to-fetch>`
  - check the CLI output
 
+**Running as a Docker Container**
+ - Prerequisite:
+   - Docker Desktop / Engine
+ -   `$ cd repo-ranker-cli`
+ -   Build: `$ docker build -t repo-ranker-cli .`
+ -   Run & Usage Example: `docker run repo-ranker-cli:latest 5`
+
 **CLI Output Description**
 
 The CLI output contains the fetched trending repositories formatted in JSON, contains various general repo details fields **including various security fields**:
