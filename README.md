@@ -18,7 +18,13 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
    - Docker Desktop / Engine
  -   `$ cd repo-ranker-cli`
  -   Build: `$ docker build -t repo-ranker-cli .`
- -   Run & Usage Example: `docker run repo-ranker-cli:latest 5`
+ -   Run & Usage Example: `$ docker run repo-ranker-cli:latest 5`
+
+**Serve as REST API**
+-   `$ cd repo-ranker-cli`
+-   `$ node server.js`
+-   Go to: `http://localhost:8080/api/trending-repos?max=5`
+-   Enjoy the results
 
 **CLI Output Description**
 
