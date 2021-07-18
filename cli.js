@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import trending from 'trending-github';
 import getScoredRepos from './modules/repo-security-scoring/index.js';
 
@@ -25,7 +27,7 @@ async function processReposAndPrintResults(maxReposToFetch) {
     const topRepos = trendingRepos.length <= maxReposToFetch ? trendingRepos : trendingRepos.slice(0, maxReposToFetch);
 
     const results = await getScoredRepos(topRepos);
-    console.log(`\nTop ${maxReposToFetch} Trending Repositories:`);
+    console.log(`\nTop ${topRepos.length} Trending Repositories:`);
     console.log(results);
 }
 
