@@ -1,7 +1,11 @@
-# Repo Ranker CLI
+# Trending Repos Security Ranker CLI
 **Description**
 
 A CLI tool to fetch trending GitHub repositories with a security score notation. As for v1.00, the CLI fetches weekly trending JavaScript repositories and the next version is planned to allow more flexibility to fetch more types of repositories.
+
+**How it works?**
+
+The CLI fetches recent GitHub's trending repos and calculating their security score by evaluating various properties of each repo
 
 **Installation & Usage**
  - Prerequisite:
@@ -18,7 +22,13 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
    - Docker Desktop / Engine
  -   `$ cd repo-ranker-cli`
  -   Build: `$ docker build -t repo-ranker-cli .`
- -   Run & Usage Example: `docker run repo-ranker-cli:latest 5`
+ -   Run & Usage Example: `$ docker run repo-ranker-cli:latest 5`
+
+**Serve as REST API**
+-   `$ cd repo-ranker-cli`
+-   `$ node server.js`
+-   Go to: `http://localhost:8080/api/trending-repos?max=5`
+-   Enjoy the results
 
 **CLI Output Description**
 
@@ -37,16 +47,21 @@ Fetching trending repos..
 Top 5 Trending Repositories:
 [
   {
-    author: '30-seconds',
-    name: '30-seconds-of-code',
-    href: 'https://github.com/30-seconds/30-seconds-of-code',
-    description: 'Short JavaScript code snippets for all your development needs',
+    author: 'shufflewzc',
+    name: 'faker2',
+    href: 'https://github.com/shufflewzc/faker2',
+    description: '不知名大佬备份',
     language: 'JavaScript',
-    stars: 80999,
-    forks: 8665,
-    starsInPeriod: 1768,
-    unusedPackages: [],
-    securityScore: 0
+    stars: 527,
+    forks: 232,
+    starsInPeriod: 295,
+    unusedPackages: [
+      'http-server',
+      'qrcode-terminal\nFail! Dependencies not listed in package.json: png-js',
+      'canvas',
+      'push'
+    ],
+    securityScore: 4
   },
   {
     author: 'trekhleb',
@@ -54,41 +69,24 @@ Top 5 Trending Repositories:
     href: 'https://github.com/trekhleb/javascript-algorithms',
     description: '📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings',
     language: 'JavaScript',
-    stars: 114528,
-    forks: 18849,
-    starsInPeriod: 1976,
+    stars: 114668,
+    forks: 18885,
+    starsInPeriod: 1410,
     unusedPackages: [
-      ' @babel/cli',
-      ' @babel/preset-env',
-      ' @types/jest',
-      ' canvas',
-      ' eslint',
-      ' eslint-config-airbnb',
-      ' eslint-plugin-import',
-      ' eslint-plugin-jest',
-      ' eslint-plugin-jsx-a11y',
-      ' eslint-plugin-react',
-      ' husky',
-      ' jest\n'
+      '@babel/cli',
+      '@babel/preset-env',
+      '@types/jest',
+      'canvas',
+      'eslint',
+      'eslint-config-airbnb',
+      'eslint-plugin-import',
+      'eslint-plugin-jest',
+      'eslint-plugin-jsx-a11y',
+      'eslint-plugin-react',
+      'husky',
+      'jest'
     ],
     securityScore: 12
-  },
-  {
-    author: 'zero205',
-    name: 'JD_tencent_scf',
-    href: 'https://github.com/zero205/JD_tencent_scf',
-    description: '京东腾讯云函数版，低调使用，不要fork！！',
-    language: 'JavaScript',
-    stars: 523,
-    forks: 162,
-    starsInPeriod: 102,
-    unusedPackages: [
-      ' http-server\nFail! Dependencies not listed in package.json: push',
-      ' canvas',
-      ' tencentcloud-sdk-nodejs',
-      ' js-yaml\n'
-    ],
-    securityScore: 4
   },
   {
     author: 'airbnb',
@@ -96,9 +94,21 @@ Top 5 Trending Repositories:
     href: 'https://github.com/airbnb/javascript',
     description: 'JavaScript Style Guide',
     language: 'JavaScript',
-    stars: 111987,
-    forks: 21464,
-    starsInPeriod: 1119,
+    stars: 112079,
+    forks: 21490,
+    starsInPeriod: 655,
+    unusedPackages: [],
+    securityScore: 0
+  },
+  {
+    author: '30-seconds',
+    name: '30-seconds-of-code',
+    href: 'https://github.com/30-seconds/30-seconds-of-code',
+    description: 'Short JavaScript code snippets for all your development needs',
+    language: 'JavaScript',
+    stars: 81084,
+    forks: 8676,
+    starsInPeriod: 1313,
     unusedPackages: [],
     securityScore: 0
   },
@@ -108,9 +118,9 @@ Top 5 Trending Repositories:
     href: 'https://github.com/philc/vimium',
     description: "The hacker's browser.",
     language: 'JavaScript',
-    stars: 16117,
-    forks: 1938,
-    starsInPeriod: 328,
+    stars: 16134,
+    forks: 1937,
+    starsInPeriod: 61,
     unusedPackages: [],
     securityScore: 0
   }
