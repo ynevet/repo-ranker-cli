@@ -5,7 +5,7 @@ A CLI tool to fetch trending GitHub repositories with a security score notation.
 
 **How it works?**
 
-The CLI fetches recent GitHub's trending repos and calculating their security score by evaluating various properties of each repo
+When executed, the CLI grabs the top GitHub's trending repos and calculating their security score by evaluating various security data points. 
 
 **Installation & Usage**
  - Prerequisite:
