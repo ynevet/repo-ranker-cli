@@ -1,4 +1,4 @@
-# Trending Repos Security Ranker CLI
+# Trending Repositories - Security Ranker CLI
 **Description**
 
 A CLI tool to fetch trending GitHub repositories with a security score notation. As for v1.00, the CLI fetches weekly trending JavaScript repositories and the next version is planned to allow more flexibility to fetch more types of repositories.
